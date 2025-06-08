@@ -5,9 +5,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         ParkingManager manager = new ParkingManager();
 
-        System.out.println("🚘 캠퍼스 주차장 안내 시스템 실행");
-        System.out.println("총 차량 대수: 150대 (모의 데이터)");
-        System.out.println("총 주차 가능 대수: 200대 (모의 데이터)\n");
+        System.out.println(" 캠퍼스 주차장 안내 시스템 실행");
+        System.out.println("총 차량 대수: 150대 ");
+        System.out.println("총 주차 가능 대수: 200대\n");
 
         System.out.print("차량 차종을 선택하세요 (전기차/일반차/트럭): ");
         String carType = sc.nextLine();
@@ -23,10 +23,10 @@ public class Main {
 
         ParkingLot lot = manager.getLotByName(selectedLot);
         if (lot != null) {
-            System.out.println("\n📄 선택한 주차장 세부 정보:");
+            System.out.println("\n 선택한 주차장 세부 정보:");
             lot.showDetails();
         } else {
-            System.out.println("❌ 해당 이름의 주차장이 없습니다.");
+            System.out.println(" 해당 이름의 주차장이 없습니다.");
         }
 
         System.out.println("\n프로그램 종료. 안전운전하세요!");

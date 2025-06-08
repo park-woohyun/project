@@ -13,10 +13,9 @@ public class ParkingManager {
     }
 
     public void recommendLots(String carType, int buildingCode) {
-        System.out.println("\n🏢 건물 번호 [" + buildingCode + "] 근처 추천 주차장:");
+        System.out.println("\n 건물 번호 [" + buildingCode + "] 근처 추천 주차장:");
 
         // 간단한 거리 기준: buildingCode의 차이가 가장 적은 주차장 3개 반환
-        // → 실제 구현에서는 GPS 거리 or 데이터베이스로 대체 가능
         lots.sort(Comparator.comparingInt(l -> Math.abs(buildingCode - lots.indexOf(l))));
 
         int count = 0;
@@ -28,7 +27,7 @@ public class ParkingManager {
             }
         }
 
-        if (count == 0) System.out.println("⚠️ 조건에 맞는 주차장이 없습니다.");
+        if (count == 0) System.out.println("조건에 맞는 주차장이 없습니다.");
     }
 
     private boolean isCompatible(ParkingLot lot, String carType) {
