@@ -24,14 +24,14 @@ public class Main {
         System.out.print("방문할 건물 번호 (예: 06): ");
         int buildingCode = sc.nextInt(); sc.nextLine();
 
-        manager.recommendLots(carType, buildingCode);
+        manager.recommendLots(carType, buildingCode); //미구현
 
         System.out.print("\n상세 정보를 볼 주차장을 입력하세요 (예: P2 지하B): ");
         String selectedLot = sc.nextLine();
-        ParkingLot lot = manager.getLotByName(selectedLot);
+        ParkingLot lot = manager.getLotByName(selectedLot); // 미구현
         if (lot != null) {
             System.out.println("\n 선택한 주차장 세부 정보:");
-            lot.showDetails();
+            lot.showDetails(); // 미구현
         } else {
             System.out.println(" 해당 이름의 주차장이 없습니다.");
         }
