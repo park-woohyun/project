@@ -1,12 +1,3 @@
-// public class ParkingLot {
-   // String name;
-    //int electricSpots;
-    //int generalSpots;
-    //int truckSpots;
-    //boolean underground;
-    //String heightLimit;
-//}
-
 import java.util.Scanner;
 
 public class Main {
@@ -14,29 +5,70 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         ParkingManager manager = new ParkingManager();
 
-        System.out.println(" 캠퍼스 주차장 안내 시스템 실행");
-        System.out.println("총 차량 대수: 150대 ");
-        System.out.println("총 주차 가능 대수: 200대\n");
+        System.out.println("청주대학교 캠퍼스 주차 안내 시스템");
+        System.out.println("총 차량 수: 145대 (모의)");
+        System.out.println("총 주차 가능 수: 180대 (모의)\n");
 
-        System.out.print("차량 차종을 선택하세요 (전기차/일반차/트럭): ");
-        String carType = sc.nextLine();
-
-        System.out.print("방문할 건물 번호 (예: 06): ");
-        int buildingCode = sc.nextInt(); sc.nextLine();
-
-        manager.recommendLots(carType, buildingCode); //미구현
-
-        System.out.print("\n상세 정보를 볼 주차장을 입력하세요 (예: P2 지하B): ");
-        String selectedLot = sc.nextLine();
-        ParkingLot lot = manager.getLotByName(selectedLot); // 미구현
-        if (lot != null) {
-            System.out.println("\n 선택한 주차장 세부 정보:");
-            lot.showDetails(); // 미구현
-        } else {
-            System.out.println(" 해당 이름의 주차장이 없습니다.");
+        // 차량 종류 입력
+        String carType = "";
+        int attempts = 0;
+        while (attempts < 3) {
+            System.out.print("차량 종류 입력 (전기차 / 일반차 / 트럭): ");
+            carType = sc.nextLine().trim();
+            if (carType.equals("전기차") || carType.equals("일반차") || carType.equals("트럭")) break;
+            attempts++;
+            System.out.println("잘못된 입력입니다.");
+        }
+        if (attempts == 3) {
+            System.out.println("잘못 입력하셨습니다. 종료합니다.");
+            return;
         }
 
-        System.out.println("\n프로그램 종료. 안전운전하세요!");
+        boolean needCharging = false;
+        if (carType.equals("전기차")) {
+            System.out.print("전기차 충전이 필요합니까? (예/아니오): ");
+            String ans = sc.nextLine().trim();
+            needCharging = ans.equalsIgnoreCase("예");
+        }
+
+        // 건물 번호 입력
+        int buildingCode = -1;
+        attempts = 0;
+        while (attempts < 3) {
+            System.out.print("방문할 건물 번호를 입력하세요: ");
+            try {
+                buildingCode = Integer.parseInt(sc.nextLine().trim());
+                if (manager.buildingToLots.containsKey(buildingCode)) break;
+            } catch (NumberFormatException ignored) {}
+            attempts++;
+            System.out.println("존재하지 않는 건물 번호입니다.");
+        }
+        if (attempts == 3) {
+            System.out.println("잘못 입력하셨습니다. 종료합니다.");
+            return;
+        }
+
+        manager.recommendLots(carType, needCharging, buildingCode);
+
+        // 주차장 ID 입력
+        String selected = "";
+        ParkingLot selectedLot = null;
+        attempts = 0;
+        while (attempts < 3) {
+            System.out.print("\n자세히 보고 싶은 주차장 ID 입력 (예: C): ");
+            selected = sc.nextLine().trim().toUpperCase();
+            selectedLot = manager.getLotById(selected);
+            if (selectedLot != null) break;
+            attempts++;
+            System.out.println("존재하지 않는 주차장입니다.");
+        }
+        if (attempts == 3) {
+            System.out.println("잘못 입력하셨습니다. 종료합니다.");
+            return;
+        }
+
+        System.out.println("\n 주차장 세부 정보:");
+        selectedLot.showDetails();
+        System.out.println("\n 안전 운전하세요!");
     }
 }
-
