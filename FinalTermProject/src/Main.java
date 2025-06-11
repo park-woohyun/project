@@ -13,9 +13,9 @@ public class Main {
         String carType = "";
         int attempts = 0;
         while (attempts < 3) {
-            System.out.print("차량 종류 입력 (전기차 / 일반차 / 트럭): ");
+            System.out.print("차량 종류 입력 (전기차 / 승용차 / 트럭): ");
             carType = sc.nextLine().trim();
-            if (carType.equals("전기차") || carType.equals("일반차") || carType.equals("트럭")) break;
+            if (carType.equals("전기차") || carType.equals("승용차") || carType.equals("트럭")) break;
             attempts++;
             System.out.println("잘못된 입력입니다.");
         }

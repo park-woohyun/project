@@ -5,19 +5,19 @@ public class ParkingManager {
     public Map<Integer, List<String>> buildingToLots = new HashMap<>();
 
     public ParkingManager() {
-        lots.add(new ParkingLot("A", "A 주차장", 2, 10, 2, false, false, "2.3m", 1));
-        lots.add(new ParkingLot("B", "B 주차장", 1, 8, 1, false, false, "2.2m", 3));
-        lots.add(new ParkingLot("C", "C 주차장", 6, 10, 1, true, false, "2.3m", 11));
-        lots.add(new ParkingLot("D", "D 주차장", 2, 7, 2, false, false, "2.3m", 14));
-        lots.add(new ParkingLot("E", "E 주차장", 2, 6, 2, false, false, "2.2m", 20));
-        lots.add(new ParkingLot("F", "F 주차장", 0, 10, 3, false, false, "2.1m", 20));
-        lots.add(new ParkingLot("G", "G 주차장", 0, 12, 3, false, false, "2.0m", 13));
-        lots.add(new ParkingLot("H", "H 주차장", 2, 15, 2, false, true, "제한 없음", 8));
-        lots.add(new ParkingLot("I", "I 주차장", 1, 7, 2, false, false, "2.1m", 50));
-        lots.add(new ParkingLot("J", "J 주차장", 1, 6, 1, false, false, "2.2m", 38));
-        lots.add(new ParkingLot("K", "K 주차장", 1, 5, 2, false, false, "2.3m", 48));
-        lots.add(new ParkingLot("L", "L 주차장", 1, 6, 2, false, false, "2.3m", 47));
-        lots.add(new ParkingLot("M", "M 주차장", 2, 7, 3, false, false, "2.4m", 51));
+        lots.add(new ParkingLot("A", "A 주차장", 2, 10, 2, false, false, "제한없음", "정문바로앞"));
+        lots.add(new ParkingLot("B", "B 주차장", 1, 8, 1, false, false, "제한없음", "중문 바로 앞"));
+        lots.add(new ParkingLot("C", "C 주차장", 6, 10, 1, true, false, "제한없음", "도서관 바로 옆"));
+        lots.add(new ParkingLot("D", "D 주차장", 2, 7, 2, false, false, "제한없음", "도서관 옆 6번건물 옆"));
+        lots.add(new ParkingLot("E", "E 주차장", 2, 6, 2, false, false, "제한없음", "93번건물 옆"));
+        lots.add(new ParkingLot("F", "F 주차장", 0, 10, 3, false, false, "제한없음", "20번건물,풋살장 옆"));
+        lots.add(new ParkingLot("G", "G 주차장", 0, 12, 3, false, false, "제한없음", "13번 건물 앞"));
+        lots.add(new ParkingLot("H", "H 주차장", 2, 15, 2, false, true, "2.5M", "10번 건물 아래"));
+        lots.add(new ParkingLot("I", "I 주차장", 1, 7, 2, false, false, "제한없음", "대운동장 옆"));
+        lots.add(new ParkingLot("J", "J 주차장", 1, 6, 1, false, false, "제한없음", "38번,39번건물 사이"));
+        lots.add(new ParkingLot("K", "K 주차장", 1, 5, 2, false, false, "제한없음", "37번 식당 옆"));
+        lots.add(new ParkingLot("L", "L 주차장", 1, 6, 2, false, false, "제한없음", "47번 건물 옆"));
+        lots.add(new ParkingLot("M", "M 주차장", 2, 7, 3, false, false, "제한없음", "체육관 뒤"));
 
         buildingToLots.put(1, Arrays.asList("A", "B", "C"));
         buildingToLots.put(2, Arrays.asList("C", "B", "D"));
@@ -85,7 +85,7 @@ public class ParkingManager {
     private boolean isCompatible(ParkingLot lot, String carType) {
         return switch (carType) {
             case "전기차" -> lot.electricSpots > 0;
-            case "일반차" -> lot.generalSpots > 0;
+            case "승용차" -> lot.generalSpots > 0;
             case "트럭" -> lot.truckSpots > 0 && !lot.isUnderground;
             default -> false;
         };
@@ -94,7 +94,7 @@ public class ParkingManager {
     private int getAvailable(ParkingLot lot, String carType) {
         return switch (carType) {
             case "전기차" -> lot.electricSpots;
-            case "일반차" -> lot.generalSpots;
+            case "승용차" -> lot.generalSpots;
             case "트럭" -> lot.truckSpots;
             default -> 0;
         };

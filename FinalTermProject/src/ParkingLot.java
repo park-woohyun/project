@@ -7,10 +7,10 @@ public class ParkingLot {
     boolean hasCharger;
     boolean isUnderground;
     String heightLimit;
-    int nearbyBuilding;
+    String nearbyBuilding;
 
     public ParkingLot(String id, String name, int electricSpots, int generalSpots, int truckSpots,
-                      boolean hasCharger, boolean isUnderground, String heightLimit, int nearbyBuilding) {
+                      boolean hasCharger, boolean isUnderground, String heightLimit, String nearbyBuilding) {
         this.id = id;
         this.name = name;
         this.electricSpots = electricSpots;
@@ -24,7 +24,7 @@ public class ParkingLot {
 
     public void showDetails() {
         System.out.println("주차장: " + name + " (" + id + ")");
-        System.out.println("일반차 자리: " + generalSpots);
+        System.out.println("승용차 자리: " + generalSpots);
         System.out.println("전기차 충전 자리: " + electricSpots + (hasCharger ? " (충전 가능)" : ""));
         System.out.println("트럭 자리: " + truckSpots);
         System.out.println("가장 가까운 건물 번호: " + nearbyBuilding);
