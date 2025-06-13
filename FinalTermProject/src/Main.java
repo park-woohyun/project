@@ -5,9 +5,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         ParkingManager manager = new ParkingManager();
 
+        int ParkingAvailable = 180; // 주차 가능한 댓수
         System.out.println("청주대학교 캠퍼스 주차 안내 시스템");
         System.out.println("총 차량 수: 145대 (모의)");
-        System.out.println("총 주차 가능 수: 180대 (모의)\n");
+        System.out.println("총 주차 가능 수: " +ParkingAvailable +  "(모의)\n");
+
+
 
         // 차량 종류 입력
         String carType = "";
